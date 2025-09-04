@@ -290,4 +290,7 @@ resource "aws_lb_target_group_attachment" "alb_tg_attach_images" {
   target_id        = aws_instance.web_server_2.id
 }
 
-resource
+resource "aws_lb_target_group_attachment" "alb_tg_attach_register" {
+  target_group_arn = aws_lb_target_group.alb_tg_register.arn
+  target_id        = aws_instance.web_server_3.id 
+}
