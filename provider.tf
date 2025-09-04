@@ -6,10 +6,9 @@ terraform {
     }
   }
   backend "s3" {
-    bucket         = "my-terraform-state-bucket"
+    bucket         = "devops-tfstate-hu1"
     key            = "alb-nginx/terraform.tfstate"
     region         = "us-east-1"
-    dynamodb_table = "terraform-locks"
     encrypt        = true
   }
 }
