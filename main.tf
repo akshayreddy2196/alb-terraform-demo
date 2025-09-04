@@ -6,7 +6,7 @@ terraform {
     }
   }
   backend "s3" {
-    bucket         = "devops-tfstate-hu1"
+    bucket         = "devops-tfstate-hu2"
     key            = "alb-nginx/terraform.tfstate"
     region         = "us-east-1"
     encrypt        = true
