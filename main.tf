@@ -125,15 +125,15 @@ resource "aws_instance" "web_server_1" {
   associate_public_ip_address = true
 
   user_data = <<EOF
-   #!/bin/bash
-   sudo dnf update -y
-   sudo dnf install -y nginx.x86_64
-   sudo systemctl start nginx
-   sudo systemctl enable nginx
-   echo "<h1>${var.page_titles[0]}</h1>" | sudo tee -a /usr/share/nginx/html/index.html
-   sudo chown -R nginx:nginx /usr/share/nginx/html
-   sudo chmod -R 755 /usr/share/nginx/html
-   EOF
+#!/bin/bash
+sudo dnf update -y
+sudo dnf install -y nginx.x86_64
+sudo systemctl start nginx
+sudo systemctl enable nginx
+echo "<h1>${var.page_titles[0]}</h1>" | sudo tee -a /usr/share/nginx/html/index.html
+sudo chown -R nginx:nginx /usr/share/nginx/html
+sudo chmod -R 755 /usr/share/nginx/html
+EOF
 
   tags = {
     Name = "WebServer-sub-1"
@@ -148,16 +148,16 @@ resource "aws_instance" "web_server_2" {
   associate_public_ip_address = true
 
   user_data = <<EOF
-   #!/bin/bash
-   sudo dnf update -y
-   sudo dnf install -y nginx.x86_64
-   sudo systemctl start nginx
-   sudo systemctl enable nginx
-   mkdir /usr/share/nginx/html/images
-   echo "<h1>${var.page_titles[1]}</h1>" | sudo tee -a /usr/share/nginx/html/images/index.html
-   sudo chown -R nginx:nginx /usr/share/nginx/html/images
-   sudo chmod -R 755 /usr/share/nginx/html/images
-   EOF
+#!/bin/bash
+sudo dnf update -y
+sudo dnf install -y nginx.x86_64
+sudo systemctl start nginx
+sudo systemctl enable nginx
+mkdir /usr/share/nginx/html/images
+echo "<h1>${var.page_titles[1]}</h1>" | sudo tee -a /usr/share/nginx/html/images/index.html
+sudo chown -R nginx:nginx /usr/share/nginx/html/images
+sudo chmod -R 755 /usr/share/nginx/html/images
+EOF
 
   tags = {
     Name = "WebServer-sub-2"
@@ -172,16 +172,16 @@ resource "aws_instance" "web_server_3" {
   associate_public_ip_address = true
 
   user_data = <<EOF
-   #!/bin/bash
-   sudo dnf update -y
-   sudo dnf install -y nginx.x86_64
-   sudo systemctl start nginx
-   sudo systemctl enable nginx
-   mkdir /usr/share/nginx/html/register
-   echo "<h1>${var.page_titles[2]}</h1>" | sudo tee -a /usr/share/nginx/html/register/index.html
-   sudo chown -R nginx:nginx /usr/share/nginx/html/register
-   sudo chmod -R 755 /usr/share/nginx/html/register
-   EOF
+#!/bin/bash
+sudo dnf update -y
+sudo dnf install -y nginx.x86_64
+sudo systemctl start nginx
+sudo systemctl enable nginx
+mkdir /usr/share/nginx/html/register
+echo "<h1>${var.page_titles[2]}</h1>" | sudo tee -a /usr/share/nginx/html/register/index.html
+sudo chown -R nginx:nginx /usr/share/nginx/html/register
+sudo chmod -R 755 /usr/share/nginx/html/register
+EOF
 
   tags = {
     Name = "WebServer-sub-3"
@@ -190,11 +190,11 @@ resource "aws_instance" "web_server_3" {
 
 # --- ALB ---
 resource "aws_lb" "alb" {
-  internal                   = false
-  load_balancer_type          = "application"
-  security_groups             = [aws_security_group.alb_sg.id]
-  subnets                     = [aws_subnet.public_subnet1.id, aws_subnet.public_subnet2.id, aws_subnet.public_subnet3.id]
-  enable_deletion_protection  = false
+  internal                  = false
+  load_balancer_type         = "application"
+  security_groups            = [aws_security_group.alb_sg.id]
+  subnets                    = [aws_subnet.public_subnet1.id, aws_subnet.public_subnet2.id, aws_subnet.public_subnet3.id]
+  enable_deletion_protection = false
 
   tags = {
     Name = "path-alb"
