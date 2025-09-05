@@ -1,4 +1,4 @@
-name: Terraform PR Check
+name: Terraform
 
 on:
   workflow_dispatch
